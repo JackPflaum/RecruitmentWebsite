@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Contact Us</h1>
+<div class="row">
+	<div class="col-6 text-center">
+		<p><b>Headquarters</b>
+		<p>Address: 1 Murray St, Perth WA 6000</p>
+		<p>Phone: 1800 111 222 </p>
+		<p>Email: jacksrecruitmentagency@email.com</p>
+	</div>
+	<div class="col-6">
+		<p>Please get in contact with us if you have any questions or fill out the form below and we will get back to you as soon as possible.</p>
+		<form method="post">
+		{% csrf_token %}
+			{{ form|crispy }}
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block content %}
+<h1>{{ user.username }}</h1>
+<p>Bio: {{ profile.bio }}</p>
+
+<a class="btn btn-primary" href="{% url 'update_profile' %}">Update Profile</a>
+
+{% endblock %}

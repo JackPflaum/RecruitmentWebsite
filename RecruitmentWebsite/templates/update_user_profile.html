@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block content %}
+<h1>Update Profile</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ profile_form | crispy }}
+    <button type="submit" class="btn btn-primary">Update profile</button>
+    <a href="{% url 'user_profile' user.id %}" class="btn btn-primary">Cancel</a>
+</form>
+{% endblock %}

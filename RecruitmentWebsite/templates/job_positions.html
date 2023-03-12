@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Job Positions{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center">Job Positions</h1>
+
+{% if jobs %}
+<div class="table-responsive-md">
+	<table class="table table-hover">
+	<thead class="text-center thead-light">
+		<tr>
+			<th>Job Title</th>
+			<th>Company</th>
+			<th>Location</th>
+			<th>Posted</th>
+			<th>Application Closing Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for job in jobs %}
+		<tr>
+			<td><a href="{% url 'job_details' job.id %}">{{ job.job_title }}</a></td>
+			<td>{{ job.company }}</td>
+			<td>{{ job.location }}</td>
+			<td>{{ job.posted }}</td>
+			<td>{{ job.closing_date }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+	</table>
+</div>
+{% else %}
+	<p>There are currently no jobs positions available. Please check back soon.</p>
+{% endif %}
+
+{% endblock %}

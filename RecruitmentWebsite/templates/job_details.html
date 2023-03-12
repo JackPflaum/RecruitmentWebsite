@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}{{ job.job_title }}{% endblock %}
+
+{% block content %}
+<h2><b>{{ job.job_title }}</b></h2>
+<hr>
+<h5>{{ job.company }}</h5>
+<br>
+<h5>{{ job.location }}</h5>
+
+<div>
+	<p>{{ job.job_details }}</p>
+</div>
+
+<form method='post' enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ apply_form | crispy }}
+
+	{% if user.is_authenticated %}
+    <button type="submit" href="{% url 'application_confirmed' job.id %}" class="btn btn-primary">Apply</button>
+
+	{% else %}
+
+	<a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary">Apply</a>
+
+	{% endif %}
+
+
+</form>
+
+{% endblock %}
