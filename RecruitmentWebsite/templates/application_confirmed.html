@@ -5,7 +5,7 @@
 {% block content %}
 <div class="justify-content-center col-6">
 	<div class="row">
-		<p>Thank you for applying for "{{ job.job_position }}" at {{ job.company }}. We will contact you soon.</p>
+		<p>Thank you for applying for "{{ job.job_title }}" at {{ job.company }}. We will contact you soon.</p>
 	</div>
-	<a href="{% url 'job_positions' %}" class="btn">Return to Job Listings</a>
+	<a href="{% url 'job_positions' %}" class="btn btn-primary">Return to Job Listings</a>
 {% endblock %}

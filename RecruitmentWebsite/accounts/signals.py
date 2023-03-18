@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from .models import Profile
@@ -20,3 +20,13 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     """save Profile instance"""
     instance.profile.save()
+
+
+@receiver(pre_save, sender=Profile)
+def deleting_old_resume(sender, instance, **kwargs):
+    """delete old resume when submitting new resume"""
+    if instance.pk:
+        old_resume = Profile.objects.get(pk=instance.pk).resume
+        new_resume = instance.resume
+        if old_resume and old_resume.url != new_resume.url:
+            old_resume.delete(save=False)
