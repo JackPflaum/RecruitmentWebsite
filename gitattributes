@@ -1,0 +1,5 @@
+*.py linguist-language=Python
+*.html linguist-language=HTML
+*.css linguist-language=CSS
+*.min.css linguist-language=CSS
+bootstrap*.css linguist-language=CSS
