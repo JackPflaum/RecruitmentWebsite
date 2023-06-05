@@ -5,6 +5,19 @@
 {% block content %}
 <h1>{{ user.username }}</h1>
 <p>Bio: {{ profile.bio }}</p>
+<h3>Jobs Applied for:</h3>
+{% if applied %}
+    {% for applied_jobs in applied %}
+    {% for id in jobpositions_id %}
+        <a href="{% url 'job_details' id %}">{{ applied_jobs.job }}</a>
+        <p>Date applied: {{ applied_jobs.applied_date }}</p>
+        <hr>
+    {% endfor %}
+    {% endfor %}
+{% else %}
+    <p>You have not applied for any jobs.</p>
+{% endif %}
+
 
 <a class="btn btn-primary" href="{% url 'update_profile' %}">Update Profile</a>
 
