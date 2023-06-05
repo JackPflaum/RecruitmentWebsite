@@ -1,0 +1,44 @@
+/*-------------------------------------Universal Properties-------------------------------------------*/
+.btn-custom {
+    background-color: #D8C4B6;
+    border-color: #213555;
+    border: 2px solid #213555;
+    color: #213555;
+    border-radius: 20px;
+    transition: all 0.4s;
+}
+
+.btn-custom:hover {
+    background-color: #213555;
+    color: #D8C4B6;
+}
+
+
+/*-------------------------------------Home Page-------------------------------------------*/
+body {
+    background-image: url('/static/images/Man_holding_briefcase.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.home-flexbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+    text-align: center;
+}
+
+.home-flexbox h3 {
+    color: #213555;
+}
