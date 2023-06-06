@@ -16,10 +16,11 @@
 
 /*-------------------------------------Home Page-------------------------------------------*/
 body {
-    background-image: url('/static/images/Man_holding_briefcase.jpg');
+    /* background-image: url('/static/images/Man_holding_briefcase.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; */
+    background-color: #cad2c5;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -28,7 +29,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100vh;
 }
 
 .home-flexbox {
@@ -40,5 +41,36 @@ body {
 }
 
 .home-flexbox h3 {
-    color: #213555;
+    color: #354f52;
 }
+
+@media (max-width: 540px){
+    /* body {
+        background-image: url('/static/images/Office_table_and_chairs.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    } */
+}
+
+
+/*-------------------------------------Navigation Bar-------------------------------------------*/
+.navbar-light .navbar-nav .nav-link {  /*navbar links*/
+    color: #cad2c5;
+}
+
+.navbar-light .navbar-nav .nav-link:first-child {  /*navbar 'home' link*/
+    color: #cad2c5;
+}
+
+.navbar-light .navbar-brand {  /*navbar 'Jack's Recruitment Agency' link*/
+    color: #cad2c5;
+}
+
+.navbar {
+    background-color: #354f52;
+}
+
+.navbar-nav.flex-nowrap {  /*stop links words dropping down to another line when screen shrinks*/
+    white-space: nowrap;
+  }
