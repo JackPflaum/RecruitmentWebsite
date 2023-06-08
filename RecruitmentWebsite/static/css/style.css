@@ -1,4 +1,4 @@
-/*-------------------------------------Universal Properties-------------------------------------------*/
+/*-------------------------------------General Properties-------------------------------------------*/
 .btn-custom {
     background-color: #D8C4B6;
     border-color: #213555;
@@ -13,17 +13,29 @@
     color: #D8C4B6;
 }
 
-
 /*-------------------------------------Home Page-------------------------------------------*/
 body {
-    /* background-image: url('/static/images/Man_holding_briefcase.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; */
-    background-color: #cad2c5;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #ffffff12;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-top: 60px;
+    height: 100vh;
 }
 
+.thick-underline {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 4px;
+  }
+  
+.thick-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px; /* Adjust the height as needed */
+    background-color: aquamarine; /* Adjust the color as needed */
+  }
 
 .home-container {
     display: flex;
@@ -41,34 +53,40 @@ body {
 }
 
 .home-flexbox h3 {
-    color: #354f52;
+    color: white;
 }
 
+#home-image {
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+
 @media (max-width: 540px){
-    /* body {
-        background-image: url('/static/images/Office_table_and_chairs.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    } */
+    #home-image {
+        max-width: 70%;
+    }
 }
 
 
 /*-------------------------------------Navigation Bar-------------------------------------------*/
 .navbar-light .navbar-nav .nav-link {  /*navbar links*/
-    color: #cad2c5;
+    color: black;
 }
 
 .navbar-light .navbar-nav .nav-link:first-child {  /*navbar 'home' link*/
-    color: #cad2c5;
+    color: black;
 }
 
 .navbar-light .navbar-brand {  /*navbar 'Jack's Recruitment Agency' link*/
-    color: #cad2c5;
+    color: black;
 }
 
 .navbar {
-    background-color: #354f52;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0 , 0, 0.1);
 }
 
 .navbar-nav.flex-nowrap {  /*stop links words dropping down to another line when screen shrinks*/
