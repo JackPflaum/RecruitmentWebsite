@@ -45,13 +45,13 @@ def login_user(request):
             if user is not None and redirect_to == "":
                 # redirects to default page
                 login(request, user)
-                messages.info(request, f'You are now logged in as {username}')
+                messages.info(request, f'{username} is now signed in.')
                 return redirect('home')
             
             elif user is not None and redirect_to != "":
                 # redirects to previous page
                 login(request, user)
-                messages.info(request, f'You are now logged in {username}')
+                messages.info(request, f'{username} is now signed in.')
                 return redirect(redirect_to)
             
             else:
