@@ -13,12 +13,40 @@
     color: #D8C4B6;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/*-------------------------------------Navigation Bar-------------------------------------------*/
+.navbar-light .navbar-nav .nav-link {  /*navbar links*/
+    color: black;
+}
+
+.navbar-light .navbar-nav .nav-link:first-child {  /*navbar 'home' link*/
+    color: black;
+}
+
+.navbar-light .navbar-brand {  /*navbar 'Jack's Recruitment Agency' link*/
+    color: black;
+}
+
+.navbar {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0 , 0, 0.1);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.navbar-nav.flex-nowrap {  /*stop links words dropping down to another line when screen shrinks*/
+    white-space: nowrap;
+  }
+
+
+
 /*-------------------------------------Home Page-------------------------------------------*/
 body {
     background-color: #ffffff12;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     margin-top: 60px;
-    height: 100vh;
+    height: 90vh;
 }
 
 .thick-underline {
@@ -56,6 +84,10 @@ body {
     color: white;
 }
 
+.home-image-container {
+    padding-top: 5px;
+}
+
 #home-image {
     max-width: 500px;
     height: auto;
@@ -70,25 +102,13 @@ body {
     }
 }
 
-
-/*-------------------------------------Navigation Bar-------------------------------------------*/
-.navbar-light .navbar-nav .nav-link {  /*navbar links*/
-    color: black;
+/*-------------------------------------Job Positions Page-------------------------------------------*/
+.job-position-container {
+    display: flex;
+    justify-content: center;
 }
 
-.navbar-light .navbar-nav .nav-link:first-child {  /*navbar 'home' link*/
-    color: black;
+.card {
+    margin: 10px 10px;
+    max-width: 700px;
 }
-
-.navbar-light .navbar-brand {  /*navbar 'Jack's Recruitment Agency' link*/
-    color: black;
-}
-
-.navbar {
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0 , 0, 0.1);
-}
-
-.navbar-nav.flex-nowrap {  /*stop links words dropping down to another line when screen shrinks*/
-    white-space: nowrap;
-  }
