@@ -31,12 +31,12 @@
         <a class="nav-link" href="{% url 'about_us' %}">About US</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'contact_us' %}">Contact Us</a>
+        <a class="nav-link contact-underline" href="{% url 'contact_us' %}">Contact Us</a>
       </li>
 
       {% if user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'user_profile' user.id %}">{{ user.username }}</a>
+        <a class="nav-link nav-user-link" href="{% url 'user_profile' user.id %}">{{ user.username }}</a>
       </li>
       <li class="nav-item">
         <a class="nav-link btn nav-button" href="{% url 'logout' %}">Logout</a>
