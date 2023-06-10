@@ -31,7 +31,13 @@
 </div>
 
 {% else %}
-	<p>There are currently no jobs positions available. Please check back soon.</p>
+<div class="job-position-container">
+	<div class="card">
+		<div class="card-body">
+			<h3 class="card-title text-center">No search results</h3>
+		</div>
+	</div>
+</div>
 {% endif %}
 
 {% endblock %}
