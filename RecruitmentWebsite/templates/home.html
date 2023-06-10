@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
 
-<div class="home-container">
-  <div class="home-flexbox">
-    <h3>Welcome to Jack's Recruitment Agency. Please click below to see our job listings.</h3>
-    <div>
-      <a class="btn btn-custom" href="{% url 'job_positions' %}">Job Positions</a>
+<div class="container d-flex align-items-center justify-content-center">
+  <div class="text-center">
+    <h3>Jack's Recruitment Agency</h3>
+    <p>Let us <span class="thick-underline">guide</span> you on your next <span class="thick-underline">journey</span></p>
+    <a class="btn btn-custom" href="{% url 'job_positions' %}">Job Positions</a>
+    <div class="home-image-container">
+      <img src="{% static 'images/team_meeting.jpg' %}" alt="Office team meeting" id="home-image">
     </div>
   </div>
 </div>
