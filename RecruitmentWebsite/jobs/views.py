@@ -6,6 +6,7 @@ from .forms import ContactUsForm, ApplicationForm
 from .models import JobPositions, Applied
 from accounts.views import login_user
 from datetime import date
+from django.db.models import Q
 
 
 def home(request):
@@ -13,8 +14,23 @@ def home(request):
 
 
 def job_positions(request):
-    """user can view all jobs that are available"""
+    """user can view all jobs that are available and use a search form to find a job"""
+
+    # keyword search for job positions
+    search_query = request.GET.get('search')
+
+    # get all job positions
     jobs = JobPositions.objects.all().order_by('posted')
+
+    # check whether user has used search box
+    # 'Q' object is used to create complex queries and '|' joins the queries
+    if search_query:
+        jobs = jobs.filter(
+            Q(job_title__icontains=search_query) |
+            Q(company__icontains=search_query) |
+            Q(location__icontains=search_query)
+        )
+
     context = {'jobs': jobs}
     return render(request, 'job_positions.html', context)
 
@@ -38,6 +54,8 @@ def job_details(request, id):
                 return render(request, 'application_confirmed.html', context)
     
     form = ApplicationForm()
+
+    # check if user has applied for the job and store as True or False
     applied = Applied.objects.filter(job=job, applicant=request.user.id).exists()
 
     context = {'job': job, 'apply_form': form, 'user': request.user, 'applied': applied}

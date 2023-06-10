@@ -6,6 +6,14 @@
 
 <h1 class="text-center">Job Positions</h1>
 
+<div class="search-container">
+	<form method="GET" action="{% url 'job_positions' %}">
+		<input type="text" name="search" placeholder="Search...">
+		<button type="submit" class="btn btn-custom">Keyword Search</button>
+		<a href="{% url 'job_positions' %}" class="btn btn-custom">Clear all</a>
+	</form>
+</div>
+
 {% if jobs %}
 <div class="job-position-container">
 	{% for job in jobs %}
