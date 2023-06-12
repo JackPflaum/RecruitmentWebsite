@@ -6,7 +6,7 @@
 
 {% block content %}
 <script>
-	<!--Displaying company location on map. loads at runtime-->
+	//Displaying company location on map. loads at runtime
     function initMap() {
 		const mapLatLng = { lat: -31.94654711222608, lng: 115.83927895342508 };
 
@@ -15,14 +15,23 @@
         zoom: 15,
     });
 
-	new google.maps.Marker({
+	//red marker on map
+	const marker = new google.maps.Marker({
 		position: mapLatLng,
 		map,
 		title: "Jack's Recruitment Agency",
-	  });
+	});
+
+	//info next to map marker when clicked
+	const infoWindow = new google.maps.InfoWindow({
+		content: "<strong>Jack's Recruitment Agency</strong>"
+	});
+
+	marker.addListener("click", () => {
+		infoWindow.open(map, marker);
+	});
     }
     window.initMap = initMap;
-
 </script>
 
 
@@ -54,7 +63,7 @@
 		<form method="post">
 		{% csrf_token %}
 			{{ form|crispy }}
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-custom">Submit</button>
 		</form>
 	</div>
 </div>
