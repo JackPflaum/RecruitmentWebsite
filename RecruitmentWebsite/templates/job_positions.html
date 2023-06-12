@@ -22,8 +22,10 @@
 		<div class="card">
 			<div class="card-body">
 				<h3 class="card-title"><a href="{% url 'job_details' job.id %}">{{ job.job_title }}</a></h3>
-				<h5 class="card-subtitle">{{ job.company }}</h5>
-				<h6 class="mt-3">{{ job.location }}</h6>
+				<div class="company-location">
+					<h5 class="card-subtitle">{{ job.company }}</h5>
+					<h6 class="">{{ job.location }}</h6>
+				</div>
 				<p class="card-text">{{ job.job_details }}</p>
 				<p>Posted: <span class="text-muted">{{ job.posted }}</span></p>
 				<p>Application Closing Date: <span class="text-muted">{{ job.closing_date }}</span></p>

@@ -179,7 +179,7 @@ h1, h2, h3, h4, h5, h6, p {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 90vh; /*accounts for height of bootstrap fixed navbar*/
 }
 
 .about-content {
@@ -189,8 +189,19 @@ h1, h2, h3, h4, h5, h6, p {
     padding-left: 10px;
 }
 
+.about-content span { /*highlights important content*/
+    color: aquamarine;
+}
+
 .center-header {
     text-align: center;
+}
+
+.company-location { /*company info on the left and location displayed on the right*/
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .image-container {
@@ -204,6 +215,7 @@ h1, h2, h3, h4, h5, h6, p {
     height: auto;
     margin: 0 auto;
     display: block;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 1024px) {
@@ -221,4 +233,14 @@ h1, h2, h3, h4, h5, h6, p {
         max-width: 100%;
         padding: 0 5px;
     }
+}
+
+
+/*-------------------------------------Contact Us Page-------------------------------------------*/
+
+
+
+
+#map {
+    
 }
