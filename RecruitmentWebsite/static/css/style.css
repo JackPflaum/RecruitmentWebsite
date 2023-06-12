@@ -1,23 +1,51 @@
 /*-------------------------------------General Properties-------------------------------------------*/
+body {
+    background-color: white;
+    padding-top: 70px; /*accounts for height of bootstrap fixed navbar */
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    font-family: "OpenSans", sans-serif;
+}
+
 .btn-custom {
-    background-color: #D8C4B6;
-    border-color: #213555;
-    border: 2px solid #213555;
-    color: #213555;
+    background-color: white;
+    border-color: black;
+    border: 1px solid black;
+    color: black;
     border-radius: 20px;
     transition: all 0.4s;
 }
 
 .btn-custom:hover {
-    background-color: #213555;
-    color: #D8C4B6;
+    background-color: black;
+    color: white;
 }
 
-h1, h2, h3, h4, h5, h6 {
+.thick-underline {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 4px;
+    text-align: center;
+  }
+  
+.thick-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px; /* Adjust the height as needed */
+    background-color: aquamarine; 
+  }
+
+/*-------------------------------------Navigation Bar-------------------------------------------*/
+.navbar {
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(0, 0 , 0, 0.1);
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-/*-------------------------------------Navigation Bar-------------------------------------------*/
 .navbar-light .navbar-nav .nav-link {  /*navbar links text color black*/
     color: black;
 }
@@ -30,12 +58,6 @@ h1, h2, h3, h4, h5, h6 {
     color: black;
 }
 
-.navbar {
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0 , 0, 0.1);
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
 .navbar-nav.flex-nowrap {  /*stop links second word dropping down to another line when screen shrinks*/
     white-space: nowrap;
   }
@@ -44,6 +66,7 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid black;
     background-color: white;
     margin-right: 5px;
+    transition: all 0.4s;
 }
 
 .nav-button:hover {
@@ -85,64 +108,34 @@ h1, h2, h3, h4, h5, h6 {
   }
 
 
-
-
 /*-------------------------------------Home Page-------------------------------------------*/
-body {
-    background-color: #ffffff12;
-    margin-top: 80px;
-    height: 90vh;
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
-
-.thick-underline {
-    display: inline-block;
-    position: relative;
-    padding-bottom: 4px;
-  }
-  
-.thick-underline::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 4px; /* Adjust the height as needed */
-    background-color: aquamarine; /* Adjust the color as needed */
-  }
 
 .home-image-container {
     padding-top: 5px;
 }
 
 #home-image {
-    max-width: 500px;
+    max-width: 400px;
     height: auto;
     margin: 0 auto;
     display: block;
+    box-shadow: 0 2px 4px rgba(0, 0 , 0, 0.5);
 }
 
 
 @media (max-width: 540px){
     #home-image {
-        max-width: 70%;
+        max-width: 90%;
     }
 }
 
 /*-------------------------------------Job Positions Page-------------------------------------------*/
-.job-position-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    height: 90vh;
-}
-
-.card {
-    margin: 10px 10px;
-    max-width: 800px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
 .search-container {  /*puts search box on right side of page*/
     display: flex;
     align-items: center;
@@ -160,9 +153,72 @@ body {
     margin: 5px;
 }
 
+.jobs-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.card {
+    margin: 10px 10px;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
 @media (max-width: 768px) {
     .card {
         width: 100%;
+    }
+}
+
+/*-------------------------------------About Us Page-------------------------------------------*/
+.about-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.about-content {
+    flex-grow: 1; /*flex items will grow relative to other flex items when there is extra space available*/
+    flex-shrink: 1; /* flex items will shrink relative to other items when there is lack of space*/
+    flex-basis: 50%; /*take up to 50% of available space within flex container*/
+    padding-left: 10px;
+}
+
+.center-header {
+    text-align: center;
+}
+
+.image-container {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 50%;
+}
+
+.about-image {
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .about-content {
+        order: 2;
+        flex-basis: 100%;
+        padding: 0 5px;
+    }
+
+    .image-container {
+        order: 1;
+    }
+
+    .about-image {
+        max-width: 100%;
+        padding: 0 5px;
     }
 }
