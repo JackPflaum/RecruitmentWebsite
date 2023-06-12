@@ -237,10 +237,33 @@ h1, h2, h3, h4, h5, h6, p {
 
 
 /*-------------------------------------Contact Us Page-------------------------------------------*/
+.contact-icons {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
 
+.address-icon {
+    margin-right: 5px;
+    color: aquamarine;
+}
 
+.phone-icon {
+    margin-right: 5px;
+    color: aquamarine;
+}
 
+.email-icon {
+    margin-right: 5px;
+    color: aquamarine;
+}
+
+#map-holder {
+    height: 400px;
+    width: 100%;
+    padding: 0 10px;
+}
 
 #map {
-    
+    height: 100%;
 }

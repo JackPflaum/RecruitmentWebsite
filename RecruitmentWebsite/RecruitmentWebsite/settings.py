@@ -35,6 +35,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(find_dotenv())
 SECRET_KEY = os.environ['SECRET_KEY']
 
+GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
