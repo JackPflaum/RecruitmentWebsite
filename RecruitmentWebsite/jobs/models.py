@@ -9,7 +9,10 @@ def use_directory_path(instance, filename):
 
 class JobPositions(models.Model):
     job_title = models.CharField(max_length=255)
+    job_summary = models.TextField(default='Job details to come.')
     job_details = models.TextField(default='Job details to come.')
+    salary = models.CharField(max_length=255,blank=True)
+    skills = models.TextField(blank=True)
     company = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
     posted = models.DateField(auto_now_add=True)
@@ -17,6 +20,10 @@ class JobPositions(models.Model):
 
     def __str__(self):
         return self.job_title
+    
+    def format_skills_dot_points(self):
+        """splits skills into separate lines so it they can be rendered as dot points on the page"""
+        return self.skills.split('\n')
     
 
 class Applied(models.Model):

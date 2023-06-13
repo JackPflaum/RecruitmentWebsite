@@ -21,8 +21,11 @@ def job_positions(request):
     # keyword search for job positions
     search_query = request.GET.get('search')
 
-    # get all job positions
-    jobs = JobPositions.objects.all().order_by('posted')
+    todays_date = date.today()
+
+    # get all job positions that haven't passed their closing date
+    #'__gt' (greater than), compares field value with provided value.
+    jobs = JobPositions.objects.filter(closing_date__gt=todays_date).order_by('posted')
 
     # check whether user has used search box
     # 'Q' object is used to create complex queries and '|' joins the queries
