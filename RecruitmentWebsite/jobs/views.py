@@ -7,6 +7,8 @@ from .models import JobPositions, Applied
 from accounts.views import login_user
 from datetime import date
 from django.db.models import Q
+from django.conf import settings
+from django.contrib import messages
 
 
 def home(request):
@@ -75,6 +77,9 @@ def about_us(request):
 
 def contact_us(request):
     """company contact information and contact form"""
+    # google api key to display google map on page
+    map_key = settings.GOOGLE_API_KEY
+
     if request.method == "POST":
         form = ContactUsForm(request.POST)
         # clean the data because the form is basic forms.Form.
@@ -96,13 +101,11 @@ def contact_us(request):
             except BadHeaderError:
                 # to prevent attackers from inserting email headers, we need to return a bad header error.
                 return HttpResponse("Invalid header found")
-            # if the form is submitted correctly, the user will be redirected to the message_confirmed page.
-            return redirect("email_confirmed")
+            
+            # if the form is submitted correctly, the user will be redirected to the home page.
+            messages.success(request, "Thank you for contacting us. We will get back to you as soon as possible.")
+            return redirect('home')
 
     # if the user simply requests to see the page, the empty form displays in the contact_us page.
     form = ContactUsForm()
-    return render(request, "contact_us.html", {"form": form})
-
-
-def email_confirmed(request):
-    return render(request, 'email_confirmed.html', {})
+    return render(request, "contact_us.html", {"form": form, "map_key": map_key})
