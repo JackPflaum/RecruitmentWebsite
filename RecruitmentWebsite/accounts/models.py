@@ -15,9 +15,13 @@ def get_default_resume():
 class Profile(models.Model):
     # extending User model using One-To-One link and signals in signals.py
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    bio = models.TextField()
+    bio = models.TextField(blank=True)
+    fullname = models.CharField(max_length=255, default='Firstname Lastname Here')
+    email = models.EmailField(default="default@email.com")
+    phone = models.CharField(max_length=20, blank=True)
+    image = models.ImageField(upload_to=use_directory_path, default='images/default_profile_image.png', blank=True) # default='media/images/'
     resume = models.FileField(upload_to=use_directory_path, default=get_default_resume, blank=True)    # call function that returns file path.
+    resume_last_updated = models.DateField(auto_now=True)
 
     def __str__(self):
         return self.user.username

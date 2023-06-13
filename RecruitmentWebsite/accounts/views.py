@@ -96,10 +96,14 @@ def update_profile(request):
         form = UserProfileForm(request.POST or None, request.FILES or None, instance=request.user.profile)
 
         if form.is_valid():
+            user.email = form.cleaned_data['email']
+            user.username = form.cleaned_data['username']
+            user.save()
             form.save()
         return redirect('user_profile', user.id)
     
     else:
-        form = UserProfileForm()
+        profile = user.profile
+        form = UserProfileForm(instance=profile, initial={'username': user.username,'email': user.email}) #pre-fill form with current data
 
     return render(request, 'update_user_profile.html', {'profile_form': form })

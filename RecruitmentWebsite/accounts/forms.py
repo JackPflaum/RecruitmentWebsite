@@ -23,7 +23,12 @@ class NewUserForm(UserCreationForm):
 # this form interacts with the profile model to let users update their profile
 class UserProfileForm(forms.ModelForm):
     resume = forms.FileField(error_messages={'required': 'Please upload a non-empty file.'})
+    email = forms.EmailField()
+    phone = forms.CharField(required=False)
+    image = forms.ImageField()
+    username = forms.CharField()
+    fullname = forms.CharField()
 
     class Meta:
         model = Profile
-        fields = ['bio', 'resume']
+        fields = ['bio', 'image', 'resume', 'username', 'fullname', 'email', 'phone']

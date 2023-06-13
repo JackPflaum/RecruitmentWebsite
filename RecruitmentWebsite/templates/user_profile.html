@@ -3,9 +3,28 @@
 {% block title %}{{ user.username }}{% endblock %}
 
 {% block content %}
-<h1>{{ user.username }}</h1>
-<p>Bio: {{ profile.bio }}</p>
-<h3>Jobs Applied for:</h3>
+<div class="center-header">
+	<h1 class="text-center thick-underline">{{ user.username }}</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Profile</h3>
+                <div id="profile-image-container">
+                    <img id="profile-image" src="{{ profile.image.url }}" alt="Profile Image">
+                </div>
+                <p class="card-text">{{ profile.bio }}</p>
+                <p>Full Name: <span class="text-muted">{{ profile.fullname }}</span></p>
+                <p>Email: <span class="text-muted">{{ user.email }}</span></p>
+                <p>Phone: <span class="text-muted">{{ profile.phone }}</span></p>
+                <p>Resume Last updated: <span class="text-muted">{{ profile.resume_last_updated }}</span></p>
+                <a class="btn btn-custom" href="{% url 'update_profile' %}">Update Profile</a>
+            </div>
+        </div>
+    </div>
+    <h3>Jobs Applied for:</h3>
 {% if applied %}
     {% for applied_jobs in applied %}
     {% for id in jobpositions_id %}
@@ -17,8 +36,6 @@
 {% else %}
     <p>You have not applied for any jobs.</p>
 {% endif %}
-
-
-<a class="btn btn-primary" href="{% url 'update_profile' %}">Update Profile</a>
+</div>
 
 {% endblock %}
