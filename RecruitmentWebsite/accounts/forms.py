@@ -27,7 +27,7 @@ class UserProfileForm(forms.ModelForm):
     phone = forms.CharField(required=False)
     image = forms.ImageField()
     username = forms.CharField()
-    fullname = forms.CharField()
+    fullname = forms.CharField(label='Full Name')
 
     class Meta:
         model = Profile
