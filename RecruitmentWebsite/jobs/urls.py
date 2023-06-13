@@ -8,5 +8,4 @@ urlpatterns = [
     path('application_confirmed/<int:id>', views.application_confirmed, name='application_confirmed'),
     path('about_us/', views.about_us, name='about_us'),
     path('contact_us/', views.contact_us, name='contact_us'),
-    path('email_confirmed/', views.email_confirmed, name='email_confirmed'),
 ]
