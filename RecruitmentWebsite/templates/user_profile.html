@@ -3,39 +3,54 @@
 {% block title %}{{ user.username }}{% endblock %}
 
 {% block content %}
-<div class="center-header">
-	<h1 class="text-center thick-underline">{{ user.username }}</h1>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="card">
-            <div class="card-body">
-                <h3 class="card-title">Profile</h3>
-                <div id="profile-image-container">
-                    <img id="profile-image" src="{{ profile.image.url }}" alt="Profile Image">
+<div class="profile-container">
+    <div class="row d-flex">
+        <div class="col-md-4 col-sm-12 profile-content">
+            <div class="card">
+                <div class="card-body">
+                    <div class="center-header">
+                        <h1 class="card-title thick-underline">{{ user.username }}</h1>
+                    </div>
+                    <div id="profile-image-container">
+                        <img id="profile-image" src="{{ profile.image.url }}" alt="Profile Image">
+                    </div>
+                    <p class="card-text text-justify">{{ profile.bio }}</p>
+                    <p>Full Name: <span class="text-muted">{{ profile.fullname }}</span></p>
+                    <p>Email: <span class="text-muted">{{ user.email }}</span></p>
+                    <p>Phone: <span class="text-muted">{{ profile.phone }}</span></p>
+                    <p>Resume Last updated: <span class="text-muted">{{ profile.resume_last_updated }}</span></p>
+                    <a class="btn btn-custom" href="{% url 'update_profile' %}">Update Profile</a>
                 </div>
-                <p class="card-text">{{ profile.bio }}</p>
-                <p>Full Name: <span class="text-muted">{{ profile.fullname }}</span></p>
-                <p>Email: <span class="text-muted">{{ user.email }}</span></p>
-                <p>Phone: <span class="text-muted">{{ profile.phone }}</span></p>
-                <p>Resume Last updated: <span class="text-muted">{{ profile.resume_last_updated }}</span></p>
-                <a class="btn btn-custom" href="{% url 'update_profile' %}">Update Profile</a>
             </div>
         </div>
+    
+        <div class="col-md-8 col-sm-12 jobs-applied">
+            {% if applied %}
+                {% for applied_job in applied %}
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title"><a href="{% url 'job_details' applied_job.job.id %}">{{ applied_job.job.job_title }}</a></h3>
+                                <div class="company-location">
+                                    <h5 class="card-subtitle">{{ applied_job.job.company }}</h5>
+                                    <h6 class="">{{ applied_job.job.location }}</h6>
+                                </div>
+                                <p class="card-text">{{ applied_job.job.job_details }}</p>
+                                <p>Posted: <span class="text-muted">{{ applied_job.job.posted }}</span></p>
+                                <p>Date applied: <span class="text-muted">{{ applied_job.applied_date }}</span></p>
+                                <p>Application Closing Date: <span class="text-muted">{{ applied_job.job.closing_date }}</span></p>
+                            </div>
+                        </div>
+                {% endfor %}
+            {% else %}
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">No results</h3>
+                            <p>You have not applied for any jobs.</p>
+                        </div>
+                    </div>
+            {% endif %}
+        </div>
     </div>
-    <h3>Jobs Applied for:</h3>
-{% if applied %}
-    {% for applied_jobs in applied %}
-    {% for id in jobpositions_id %}
-        <a href="{% url 'job_details' id %}">{{ applied_jobs.job }}</a>
-        <p>Date applied: {{ applied_jobs.applied_date }}</p>
-        <hr>
-    {% endfor %}
-    {% endfor %}
-{% else %}
-    <p>You have not applied for any jobs.</p>
-{% endif %}
 </div>
 
 {% endblock %}

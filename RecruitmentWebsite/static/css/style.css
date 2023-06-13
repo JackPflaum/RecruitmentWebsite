@@ -8,6 +8,10 @@ h1, h2, h3, h4, h5, h6, p {
     font-family: "OpenSans", sans-serif;
 }
 
+a:hover {
+    transition: all 0.4s;
+}
+
 .btn-custom {
     background-color: white;
     border-color: black;
@@ -269,18 +273,21 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 /*-------------------------------------User Profile Page-------------------------------------------*/
+.profile-container {
+    width: 95%;
+}
+
 #profile-image-container {
     padding: 5px;
 }
 
 #profile-image {
-    max-width: 200px;    
+    max-width: 180px;    
     height: auto;
     margin: 0 auto;
     display: block;
     box-shadow: 0 2px 4px rgba(0, 0 , 0, 0.2);
 }
-
 
 
 /*-------------------------------------Update User Profile Page-------------------------------------------*/
@@ -295,7 +302,6 @@ h1, h2, h3, h4, h5, h6, p {
     width: 100%;
     max-width: 900px;
 }
-
 
 
 /*-------------------------------------Job Details Page-------------------------------------------*/

@@ -70,7 +70,7 @@ def logout_user(request):
     return redirect('home')
 
 
-@login_required(login_url='login')    #limits access to logged in users only
+@login_required(login_url='login')  # limits access to logged in users only
 def user_profile(request, id):
     """shows the current users profile"""
     # if User does not have a Profile, then a Profile is created
@@ -79,11 +79,9 @@ def user_profile(request, id):
         missing_profile.save()
 
     profile = Profile.objects.get(id=id)
-    applied_jobs = Applied.objects.filter(applicant=request.user.id)    # get all the jobs user has applied for
-    jobpositions_ids = applied_jobs.values_list('job_id', flat=True)
-    #job_positions = JobPositions.objects.filter(id=jobpositions_ids)
+    applied_jobs = Applied.objects.filter(applicant=request.user.id)  # get all the jobs user has applied for
 
-    context = {'profile': profile, 'applied': applied_jobs, 'jobpositions_id': jobpositions_ids}
+    context = {'profile': profile, 'applied': applied_jobs}
     return render(request, 'user_profile.html', context)
 
 
