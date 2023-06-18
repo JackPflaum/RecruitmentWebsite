@@ -79,7 +79,9 @@ def user_profile(request, id):
         missing_profile.save()
 
     profile = Profile.objects.get(id=id)
-    applied_jobs = Applied.objects.filter(applicant=request.user.id)  # get all the jobs user has applied for
+
+    # get all the jobs user has applied for and order by most recent first.
+    applied_jobs = Applied.objects.filter(applicant=request.user.id).order_by('-applied_date')
 
     context = {'profile': profile, 'applied': applied_jobs}
     return render(request, 'user_profile.html', context)
