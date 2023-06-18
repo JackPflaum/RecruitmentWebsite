@@ -26,14 +26,13 @@
 					<h5 class="card-subtitle">{{ job.company }}</h5>
 					<h6 class="">{{ job.location }}</h6>
 				</div>
-				<p class="card-text">{{ job.job_details }}</p>
+				<p class="card-text">{{ job.job_summary }}</p>
 				<p>Posted: <span class="text-muted">{{ job.posted }}</span></p>
 				<p>Application Closing Date: <span class="text-muted">{{ job.closing_date }}</span></p>
 			</div>
 		</div>
 	</div>
 	{% endfor %}
-
 
 {% else %}
 	<div class="jobs-card-container">
