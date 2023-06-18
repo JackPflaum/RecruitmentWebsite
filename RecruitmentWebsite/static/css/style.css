@@ -12,6 +12,14 @@ a:hover {
     transition: all 0.4s;
 }
 
+.paragraph-container { /*create automatic line separation for paragraphs*/
+    white-space: pre-line;
+}
+
+.custom-hr {
+    border-color: aquamarine;
+}
+
 .btn-custom {
     background-color: white;
     border-color: black;
