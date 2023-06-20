@@ -14,11 +14,13 @@
                     <div id="profile-image-container">
                         <img id="profile-image" src="{{ profile.image.url }}" alt="Profile Image">
                     </div>
-                    <p class="card-text text-justify">{{ profile.bio }}</p>
-                    <p>Full Name: <span class="text-muted">{{ profile.fullname }}</span></p>
+                    <div class="paragraph-container">
+                        <p class="card-text text-justify">{{ profile.bio }}</p>
+                    </div>
+                    <p>Full name: <span class="text-muted">{{ profile.fullname }}</span></p>
                     <p>Email: <span class="text-muted">{{ user.email }}</span></p>
                     <p>Phone: <span class="text-muted">{{ profile.phone }}</span></p>
-                    <p>Resume Last updated: <span class="text-muted">{{ profile.resume_last_updated }}</span></p>
+                    <p>Resume last updated: <span class="text-muted">{{ profile.resume_last_updated }}</span></p>
                     <a class="btn btn-custom" href="{% url 'update_profile' %}">Update Profile</a>
                 </div>
             </div>
@@ -37,7 +39,7 @@
                                     <h5 class="card-subtitle">{{ applied_job.job.company }}</h5>
                                     <h6 class="">{{ applied_job.job.location }}</h6>
                                 </div>
-                                <p class="card-text">{{ applied_job.job.job_details }}</p>
+                                <p class="card-text">{{ applied_job.job.job_summary }}</p>
                                 <p>Posted: <span class="text-muted">{{ applied_job.job.posted }}</span></p>
                                 <p>Date applied: <span class="text-muted">{{ applied_job.applied_date }}</span></p>
                                 <p>Application Closing Date: <span class="text-muted">{{ applied_job.job.closing_date }}</span></p>
