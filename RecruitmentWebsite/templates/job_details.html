@@ -5,34 +5,47 @@
 {% block title %}{{ job.job_title }}{% endblock %}
 
 {% block content %}
-<h2><b>{{ job.job_title }}</b></h2>
-<hr>
-<h5>{{ job.company }}</h5>
-<br>
-<h5>{{ job.location }}</h5>
+<div class="container">
+	<h2 class="thick-underline">{{ job.job_title }}</h2>
+	<h5 class="text-muted">{{ job.company }}</h5>
+	<h5 class="text-muted">{{ job.location }}</h5>
+	<p>Salary: {{ job.salary }}</p>
+	<p>Posted: <span class="text-muted">{{ job.posted }}</span></p>
+	<hr class="custom-hr">
+	<div class="paragraph-container">
+		<p>{{ job.job_details }}</p>
+	</div>
 
-<div>
-	<p>{{ job.job_details }}</p>
-</div>
-
-<form method='post' enctype="multipart/form-data">
-	{% csrf_token %}
-
-	{% if user.is_authenticated %}
-
-		{% if applied %}
-			<p><b>You have already applied for this job!</b></p>
-			<a href="{% url 'job_positions' %}" class="btn btn-primary">Back to Job Positions</a>
-		{% else %}
-			{{ apply_form | crispy }}
-    		<button type="submit" href="{% url 'application_confirmed' job.id %}" class="btn btn-primary">Apply</button>
-		{% endif %}
-
-	{% else %}
-		<a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary">Apply</a>
+	{% if job.skills %}
+	<h5>Skills Required:</h5>
+	<ul>
+		{% for skill in job.format_skills_dot_points %}
+		<li>{{ skill }}</li>
+		{% endfor %}
+	</ul>
 	{% endif %}
 
+	<hr class="custom-hr">
+	<p>Closing date: <span class="text-muted">{{ job.closing_date }}</span></p>
 
-</form>
+	<form method='post' enctype="multipart/form-data" class="mb-3">
+		{% csrf_token %}
+	
+		{% if user.is_authenticated %}
+	
+			{% if applied %}
+				<p><b>You have already applied for this job!</b></p>
+				<a href="{% url 'job_positions' %}" class="btn btn-primary">Back to Job Positions</a>
+			{% else %}
+				{{ apply_form | crispy }}
+				<button type="submit" href="{% url 'application_confirmed' job.id %}" class="btn btn-primary">Apply</button>
+			{% endif %}
+	
+		{% else %}
+			<a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary">Apply</a>
+		{% endif %}
+	
+	</form>
 
+</div>
 {% endblock %}
