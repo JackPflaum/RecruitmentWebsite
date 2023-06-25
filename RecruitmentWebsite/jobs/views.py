@@ -9,6 +9,7 @@ from datetime import date
 from django.db.models import Q
 from django.conf import settings
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def home(request):
@@ -35,6 +36,17 @@ def job_positions(request):
             Q(company__icontains=search_query) |
             Q(location__icontains=search_query)
         )
+    
+    # add pagination
+    paginator = Paginator(jobs, 2) # shows 2 jobs per page
+    page = request.GET.get('page') # retrieves the value associated with the 'page' parameter
+
+    try:
+        jobs = paginator.page(page) # retrieves the specific page from the 'paginator' object
+    except PageNotAnInteger:
+        jobs = paginator.page(1) # if the page number is not a valid integer it returns the first page
+    except EmptyPage:
+        jobs = paginator.page(paginator.num_pages) # if the page number is out of range it delivers the last page
 
     context = {'jobs': jobs}
     return render(request, 'job_positions.html', context)

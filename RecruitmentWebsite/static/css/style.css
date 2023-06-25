@@ -178,6 +178,27 @@ a:hover {
     }
 }
 
+.pagination,
+ .jsgrid .jsgrid-pager {
+     display: flex;
+     padding-left: 0;
+     list-style: none;
+     border-radius: 0.25rem;
+ }
+ 
+ .page-link {
+     color: black
+ }
+
+ .pagination.pagination-flat .page-item {
+     margin: 0.25rem;
+ }
+
+ .pagination-success .page-item.active .page-link span {
+     background: aquamarine;
+     border-color: aquamarine;
+ }
+ 
 /*-------------------------------------About Us Page-------------------------------------------*/
 .about-container {
     display: flex;
