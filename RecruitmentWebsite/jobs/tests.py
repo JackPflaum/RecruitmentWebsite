@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 from .views import home, job_details, job_positions
 from .models import JobPositions
+from django.db.models import Q
 
 
 class HomeTests(TestCase):
@@ -16,6 +17,14 @@ class HomeTests(TestCase):
         """the purpose is to verify that the root URL correctly mapped to the 'home' view"""
         view = resolve('/')
         self.assertEqual(view.func, home)
+    
+
+class NavigationBarTests(TestCase):
+    """Tests for the top navigation bar"""
+
+    # def test_navigation_links(self):
+    #     response = self.client.get('/')
+    #     self.assertContains(response, '<a href="{}">Home</a>')
 
 
 class JobPositionsTests(TestCase):
@@ -23,7 +32,10 @@ class JobPositionsTests(TestCase):
 
     def setUp(self):
         """create JobPositions instance for test cases"""
-        JobPositions.objects.create(job_title='Carpenter', company='Wood Inc', location='Perth', closing_date='1994-06-14')
+        JobPositions.objects.create(job_title='Carpenter', company='Wood Inc', location='Perth', closing_date='2040-06-14')
+        JobPositions.objects.create(job_title='Accountant', company='Munroes', location='Perth', closing_date='2040-06-14')
+        JobPositions.objects.create(job_title='Electrician', company='Elextric', location='Fremantle', closing_date='2040-06-14')
+
 
     def test_job_positions_view_success_status(self):
         url = reverse('job_positions')
@@ -35,14 +47,27 @@ class JobPositionsTests(TestCase):
         view = resolve('/job_positions/')
         self.assertEqual(view.func, job_positions)
 
+    def test_job_positions_search_box_good(self):
+        """check job_positions search box returns the JobPositions objects that contains the users search term"""
+        keyword_search = 'Perth'
+        url = reverse('job_positions')
+        response = self.client.get(url, {'search': keyword_search})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, keyword_search)
 
-    # currently failing.
-    # def test_job_positions_search_box(self):
-    #     keyword_search = 'Carpenter'
-    #     url = reverse('job_positions')
-    #     response = self.client.get(url, {'search': keyword_search})
-    #     self.assertEqual(response.status_code, 200)
-    #     self.assertContains(response, keyword_search)
+        # check correct number of 'jobs' are returned
+        jobs_page = response.context['jobs'] # 'Page' object because of pagination
+        jobs_count = jobs_page.paginator.count # get count of all jobs across all pages
+        expected_count = 2 # two objects contain 'Perth' keyword out of 3
+        self.assertEqual(jobs_count, expected_count)
+
+    def test_job_positions_search_box_bad(self):
+        """check job_positions search box returns 'No search results' when no JobPositions object matches user search term"""
+        keyword_search = 'bad_keyword'
+        url = reverse('job_positions')
+        response = self.client.get(url, {'search': keyword_search})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'No search results')
 
 
 class JobDetailsTest(TestCase):
@@ -50,7 +75,7 @@ class JobDetailsTest(TestCase):
 
     def setUp(self):
         """create JobPositions instance for test cases"""
-        JobPositions.objects.create(job_title='Carpenter', company='Wood Inc', location='Perth', closing_date='1994-06-14')
+        JobPositions.objects.create(job_title='Carpenter', company='Wood Inc', location='Perth', closing_date='2040-06-14')
     
     def test_job_details_view_success_status(self):
         """returning status code 200 for an existing JobPositions object"""
