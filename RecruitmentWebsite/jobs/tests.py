@@ -2,7 +2,6 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 from .views import home, job_details, job_positions
 from .models import JobPositions
-from django.db.models import Q
 
 
 class HomeTests(TestCase):
@@ -36,7 +35,6 @@ class JobPositionsTests(TestCase):
         JobPositions.objects.create(job_title='Accountant', company='Munroes', location='Perth', closing_date='2040-06-14')
         JobPositions.objects.create(job_title='Electrician', company='Elextric', location='Fremantle', closing_date='2040-06-14')
 
-
     def test_job_positions_view_success_status(self):
         url = reverse('job_positions')
         response = self.client.get(url)
@@ -68,6 +66,13 @@ class JobPositionsTests(TestCase):
         response = self.client.get(url, {'search': keyword_search})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'No search results')
+    
+    def test_job_link_to_job_details_page(self):
+        """check job links take user to job_details page"""
+        job_details_url = reverse('job_details', kwargs={'id': 1}) # get url of Job Details page for first job
+        job_positions_url = reverse('job_positions')
+        response = self.client.get(job_positions_url)
+        self.assertContains(response, job_details_url) # assert job link is present in the response HTML
 
 
 class JobDetailsTest(TestCase):
