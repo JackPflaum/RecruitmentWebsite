@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 from .views import home, job_details, job_positions
 from .models import JobPositions
-
+from django.contrib.auth.models import User
 
 class HomeTests(TestCase):
     """Tests for home view"""
@@ -21,9 +21,38 @@ class HomeTests(TestCase):
 class NavigationBarTests(TestCase):
     """Tests for the top navigation bar"""
 
-    # def test_navigation_links(self):
-    #     response = self.client.get('/')
-    #     self.assertContains(response, '<a href="{}">Home</a>')
+    def setUp(self):
+        """create user for user_profile and logout navigation links"""
+        self.user = User.objects.create_user(username='jack', email='jack@email.com', password='password123')
+
+    def test_navigation_links(self):
+        response = self.client.get('/') # GET request to the Home page (user not logged in)
+        
+        navigation_links = [
+                    {'url': reverse('home')},
+                    {'url': reverse('job_positions')},
+                    {'url': reverse('about_us')},
+                    {'url': reverse('contact_us')},
+                    {'url': reverse('login')},
+                    {'url': reverse('register')}
+                    ]
+        
+        self.client.login(username='jack', password='password123') # log in the user
+        logged_in_response = self.client.get('/') # GET request to the Home page (user is logged in)
+
+        # links that appear when user is logged in
+        logged_in_links = [
+            {'url': reverse('logout')},
+            {'url': reverse('user_profile', kwargs={'id': self.user.pk})}
+            ]
+
+        for url in navigation_links:
+            # assert navigation links are present in the response HTML
+            self.assertContains(response, url['url'])
+
+        for url in logged_in_links:
+            # assert links are present in response HTML when user is logged in
+            self.assertContains(logged_in_response, url['url'])
 
 
 class JobPositionsTests(TestCase):
