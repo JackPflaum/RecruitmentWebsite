@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}Application Confirmed{% endblock %}
-
 {% block content %}
-<div class="justify-content-center col-6">
-	<div class="row">
-		<p>Thank you for applying for "{{ job.job_title }}" at {{ job.company }}. We will contact you soon.</p>
+<div class="container">
+	<div class="text-center pt-5">
+		<p>Thank you for applying for "{{ job.job_title }}" at {{ job.company }}.</p>
+		<p class="thick-underline">We will contact you soon.</p>
+		<br>
+		<a href="{% url 'job_positions' %}" class="btn btn-custom">Return to Job Listings</a>
 	</div>
-	<a href="{% url 'job_positions' %}" class="btn btn-primary">Return to Job Listings</a>
+</div>
 {% endblock %}
