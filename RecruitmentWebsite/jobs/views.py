@@ -38,7 +38,7 @@ def job_positions(request):
         )
     
     # add pagination
-    paginator = Paginator(jobs, 2) # shows 2 jobs per page
+    paginator = Paginator(jobs, 4) # shows 4 jobs per page
     page = request.GET.get('page') # retrieves the value associated with the 'page' parameter
 
     try:
