@@ -52,9 +52,9 @@ def job_positions(request):
     return render(request, 'job_positions.html', context)
 
 
-def job_details(request, id):
+def job_details(request, job_slug):
     """user can view job details and apply for job"""
-    job = get_object_or_404(JobPositions, id=id)
+    job = get_object_or_404(JobPositions, slug=job_slug)
 
     if request.method == "POST":
         form = ApplicationForm(request.POST or None, request.FILES or None)
@@ -79,9 +79,9 @@ def job_details(request, id):
     return render(request, 'job_details.html', context)
 
 
-def application_confirmed(request, id):
+def application_confirmed(request, job_slug):
     """confirm user has applied for job"""
-    job = get_object_or_404(JobPositions, id=id)
+    job = get_object_or_404(JobPositions, slug=job_slug)
     context = {'job': job}
     return render(request, 'application_confirmed.html', context)
 

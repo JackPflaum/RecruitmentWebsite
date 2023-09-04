@@ -34,7 +34,7 @@
                 {% for applied_job in applied %}
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title"><a href="{% url 'job_details' applied_job.job.id %}">{{ applied_job.job.job_title }}</a></h3>
+                                <h3 class="card-title"><a href="{% url 'job_details' applied_job.job.slug %}">{{ applied_job.job.job_title }}</a></h3>
                                 <div class="company-location">
                                     <h5 class="card-subtitle">{{ applied_job.job.company }}</h5>
                                     <h6 class="">{{ applied_job.job.location }}</h6>

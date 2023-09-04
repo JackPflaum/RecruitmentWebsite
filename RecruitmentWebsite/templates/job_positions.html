@@ -21,7 +21,7 @@
 	<div class="jobs-card-container">
 		<div class="card">
 			<div class="card-body">
-				<h3 class="card-title"><a href="{% url 'job_details' job.id %}">{{ job.job_title }}</a></h3>
+				<h3 class="card-title"><a href="{% url 'job_details' job.slug %}">{{ job.job_title }}</a></h3>
 				<div class="company-location">
 					<h5 class="card-subtitle">{{ job.company }}</h5>
 					<h6 class="">{{ job.location }}</h6>
