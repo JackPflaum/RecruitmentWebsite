@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 
 def use_directory_path(instance, filename):
     """returns the directory path where the media file will be stored"""
@@ -22,6 +23,18 @@ class Profile(models.Model):
     image = models.ImageField(upload_to=use_directory_path, default='images/default_profile_image.png', blank=True) # default='media/images/'
     resume = models.FileField(upload_to=use_directory_path, default=get_default_resume, blank=True)    # call function that returns file path.
     resume_last_updated = models.DateField(auto_now=True)
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return self.user.username
+    
+    def slugify_username(self):
+         """slugify the users username"""
+         if not self.slug:
+              self.slug = slugify(self.user.username)
+
+    def save(self, *args, **kwargs):
+         """slugify username and save to instance"""
+         self.slugify_username()
+
+         super().save(*args, **kwargs)
