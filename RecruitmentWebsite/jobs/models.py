@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import User
+from django.template.defaultfilters import slugify
 
 def use_directory_path(instance, filename):
     """returns the directory path where the media file will be stored"""
@@ -17,6 +18,7 @@ class JobPositions(models.Model):
     location = models.CharField(max_length=255)
     posted = models.DateField(auto_now_add=True)
     closing_date = models.DateField()
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return self.job_title
@@ -24,6 +26,29 @@ class JobPositions(models.Model):
     def format_skills_dot_points(self):
         """splits skills into separate lines so it they can be rendered as dot points on the page"""
         return self.skills.split('\n')
+    
+    def slugify_job(self):
+        """slugify job position slug field using title and company"""
+        if not self.slug:
+            job_title_slug = slugify(self.job_title)
+            company_slug = slugify(self.company)
+
+            # create unique slug
+            unique_slug = f'{job_title_slug}_{company_slug}'
+            num = 2
+
+            # if slug already exists then add incremental number to the end
+            while JobPositions.objects.filter(slug=unique_slug).exists():
+                unique_slug = f'{job_title_slug}_{company_slug}-{num}'
+                num += 2
+                
+            self.slug = unique_slug
+
+    def save(self, *args, **kwargs):
+        """slugify job position"""
+        self.slugify_job()
+
+        super().save(*args, **kwargs)
     
 
 class Applied(models.Model):
