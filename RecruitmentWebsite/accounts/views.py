@@ -102,7 +102,7 @@ def update_profile(request):
             user.username = form.cleaned_data['username']
             user.save()
             form.save()
-        return redirect('user_profile', user.id)
+        return redirect('user_profile', user.profile.slug)
     
     else:
         profile = user.profile
