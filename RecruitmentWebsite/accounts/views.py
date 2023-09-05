@@ -23,7 +23,6 @@ def register_user(request):
             login(request, user)    # user is logged in
             messages.success(request, 'Registration Successful.')
             return redirect('home')
-        
         else:
             messages.error(request, 'Unsuccessful registration. Invalid Information.')
 
@@ -74,14 +73,14 @@ def logout_user(request):
 
 
 @login_required(login_url='login')  # limits access to logged in users only
-def user_profile(request, id):
+def user_profile(request, slug):
     """shows the current users profile"""
     # if User does not have a Profile, then a Profile is created
     if not hasattr(request.user, 'profile'):
         missing_profile = Profile.objects.create(user=request.user)
         missing_profile.save()
 
-    profile = Profile.objects.get(id=id)
+    profile = Profile.objects.get(slug=slug)
 
     # get all the jobs user has applied for and order by most recent first.
     applied_jobs = Applied.objects.filter(applicant=request.user.id).order_by('-applied_date')

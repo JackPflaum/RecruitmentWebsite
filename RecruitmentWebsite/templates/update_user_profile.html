@@ -14,7 +14,7 @@
             {% csrf_token %}
             {{ profile_form | crispy }}
             <button type="submit" class="btn btn-custom">Update profile</button>
-            <a href="{% url 'user_profile' user.id %}" class="btn btn-custom">Cancel</a>
+            <a href="{% url 'user_profile' user.profile.slug %}" class="btn btn-custom">Cancel</a>
         </form>
     </div>
 </div>
