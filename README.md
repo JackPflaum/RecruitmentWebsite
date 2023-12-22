@@ -26,4 +26,4 @@ About Page
 ![About Page](Screenshots/recruitment_about_us_page.png)
 
 Contact Page
-![Contact Page](Screenshots/recruitment_contact_us_page)
+![Contact Page](Screenshots/recruitment_contact_us_page.png)
